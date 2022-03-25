@@ -4,6 +4,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.StandardCopyOption
 
+import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 
 import scala.meta.io.AbsolutePath
@@ -20,7 +21,7 @@ trait BuildTool {
   def bloopInstall(
       workspace: AbsolutePath,
       systemProcess: List[String] => Future[WorkspaceLoadedStatus]
-  ): Future[WorkspaceLoadedStatus]
+  )(implicit ec: ExecutionContext): Future[WorkspaceLoadedStatus]
 
   def digest(workspace: AbsolutePath): Option[String]
 
